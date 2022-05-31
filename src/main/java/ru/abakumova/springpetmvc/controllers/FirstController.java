@@ -3,17 +3,24 @@ package ru.abakumova.springpetmvc.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/first")
 public class FirstController {
+
     @GetMapping("/hello")
-    public  String helloPage(){
-return "first/hello";
+    public String helloPage(@RequestParam(value = "name") String name, @RequestParam(value = "surname", required = false) String surname) {
+
+        System.out.println(name + ", " + surname);
+        System.out.println(surname == null);
+        return "first/hello";
     }
 
     @GetMapping("/goodbye")
-    public String goodByePage(){
+    public String goodByePage() {
         return "first/goodbye";
     }
 }
